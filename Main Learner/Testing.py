@@ -13,7 +13,7 @@ Data = Data_Class(Model.input_count, Model.output_count)
 
 Data.extract(data_name + "TEST")
 
-model = Word2Vec.load(".\\Data\\" + data_name[6:] + "RAW.model")
+model = Word2Vec.load("./Data/" + data_name[6:] + "RAW.model")
 
 Model.recursive_test(Data)
 
