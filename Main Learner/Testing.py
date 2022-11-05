@@ -10,8 +10,7 @@ model_name = input("Model name: ")
 Model = Model_Class()
 Model.load(model_name)
 
-Data = Data_Class(Model.input_count, Model.output_count)
-
+Data = Data_Class()
 Data.extract(data_name + "TEST")
 
 model = Word2Vec.load("./DATA/" + data_name[6:] + "RAW.model")
