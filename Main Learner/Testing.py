@@ -20,7 +20,7 @@ output_values = []
 text = ""
 
 for i in range(100):
-    Data.load(Data.input_values[-Model.input_count+len(output_values):]+output_values+[0,0,0,0,0,0,0,0], [], 1, 8)
+    Data.load(Data.input_values[-Model.input_count+len(output_values):]+output_values, [], stream=Data.stream, shift_count=Data.shift_count)
     Model.test(Data)
     
     vector = numpy.array([float(i) for i in Model.output_values])
@@ -29,6 +29,7 @@ for i in range(100):
     text += word
     
     output_values = Model.output_values.copy()
+    print(output_values)
     
     Data.input_values = Data.input_values[:-Model.output_count]
     

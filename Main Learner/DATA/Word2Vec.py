@@ -18,24 +18,24 @@ for i in sent_tokenize(filer):
 try:
     model = Word2Vec.load(name + "RAW.model")
 except:  
-    model = Word2Vec(data, vector_size=8, min_count=1, window=16)
+    model = Word2Vec(data, vector_size=16, min_count=0, window=32)
     model.save(name + "RAW.model")
 finally:
     print(model.wv.key_to_index.keys())
     print(data)
     input_values = []
     
-    vector_size = 8
+    vector_size = 16
     
     input_count = 128
-    output_count = 8
+    output_count = 64
     
-    for line in data:
+    for line in list(model.wv.key_to_index.keys()):
         input_values += model.wv[line].tolist()
         
     input_values = [str(i) for i in input_values]
     
-    halfway_point = int(len(input_values)/2)-int(len(input_values)/2)%vector_size
+    halfway_point = len(input_values)//2-len(input_values)//2%vector_size
     
     to_write_train = ",".join(input_values[:halfway_point])
     to_write_validate = ",".join(input_values[halfway_point:])
