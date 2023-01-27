@@ -20,6 +20,7 @@ output_values = []
 text = ""
 
 for i in range(100):
+    print(Data.input_values[-Model.input_count+len(output_values):]+output_values)
     Data.load(Data.input_values[-Model.input_count+len(output_values):]+output_values, [], stream=Data.stream, shift_count=Data.shift_count)
     Model.test(Data)
     

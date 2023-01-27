@@ -13,22 +13,22 @@ for i in sent_tokenize(filer):
     for j in word_tokenize(i):
         temp.append(j.lower())
         
-    data += temp
+    data.append(temp)
     
 try:
     model = Word2Vec.load(name + "RAW.model")
 except:  
-    model = Word2Vec(data, vector_size=16, min_count=0, window=32)
+    model = Word2Vec(data, vector_size=8, min_count=1, window=16)
     model.save(name + "RAW.model")
 finally:
     print(model.wv.key_to_index.keys())
     print(data)
     input_values = []
     
-    vector_size = 16
+    vector_size = 8
     
-    input_count = 128
-    output_count = 64
+    input_count = 32
+    output_count = 32
     
     for line in list(model.wv.key_to_index.keys()):
         input_values += model.wv[line].tolist()
