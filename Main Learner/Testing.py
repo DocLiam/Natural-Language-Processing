@@ -17,21 +17,17 @@ model = Word2Vec.load("./DATA/" + data_name[6:] + "RAW.model")
 
 output_values = []
 
+Data.load(Data.input_values[-Model.input_count:], [], stream=Data.stream, shift_count=Data.shift_count)
+print(Data.input_values)
+Model.recursive_test(Data, loop_count=10, feedback_count=Data.shift_count)
+
 text = ""
 
-for i in range(100):
-    print(Data.input_values[-Model.input_count+len(output_values):]+output_values)
-    Data.load(Data.input_values[-Model.input_count+len(output_values):]+output_values, [], stream=Data.stream, shift_count=Data.shift_count)
-    Model.test(Data)
+for i in range(int(len(Model.recursive_output_values)//Data.shift_count)):
+    vector = [float(value) for value in Model.recursive_output_values[i*Data.shift_count:i*Data.shift_count+Data.shift_count]]
     
-    vector = numpy.array([float(i) for i in Model.output_values])
+    word = model.wv.most_similar(numpy.array(vector))[0][0]
     
-    word = model.wv.most_similar(vector)[0][0]
-    text += word
-    
-    output_values = Model.output_values.copy()
-    print(output_values)
-    
-    Data.input_values = Data.input_values[:-Model.output_count]
-    
-print(text)
+    text += word + " "
+
+print(text + "\n")

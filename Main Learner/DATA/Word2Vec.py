@@ -18,20 +18,21 @@ for i in sent_tokenize(filer):
 try:
     model = Word2Vec.load(name + "RAW.model")
 except:  
-    model = Word2Vec(data, vector_size=8, min_count=1, window=16)
+    model = Word2Vec(data, vector_size=5, min_count=1, window=8)
     model.save(name + "RAW.model")
 finally:
     print(model.wv.key_to_index.keys())
     print(data)
     input_values = []
     
-    vector_size = 8
+    vector_size = 5
     
-    input_count = 32
-    output_count = 32
+    input_count = 60
+    output_count = 15
     
-    for line in list(model.wv.key_to_index.keys()):
-        input_values += model.wv[line].tolist()
+    for sentence in data:
+        for word in sentence:
+            input_values += model.wv[word].tolist()
         
     input_values = [str(i) for i in input_values]
     
