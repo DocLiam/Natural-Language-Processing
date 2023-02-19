@@ -1,5 +1,6 @@
 from audioop import rms
-from DeepLearner import *
+from DeepLearningOptimized import Data_DL
+from DeepLearningOptimized import Model_DL
 import matplotlib.pyplot as plt
 from gensim.models import Word2Vec
 import numpy
@@ -7,10 +8,10 @@ import numpy
 data_name = input("Data name: ")
 model_name = input("Model name: ")
 
-Model = Model_Class()
+Model = Model_DL.model()
 Model.load(model_name)
 
-Data = Data_Class()
+Data = Data_DL.data()
 Data.extract(data_name + "TEST")
 
 model = Word2Vec.load("./DATA/" + data_name[6:] + "RAW.model")
