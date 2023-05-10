@@ -28,7 +28,7 @@ for i in range(int(len(Model.recursive_output_values)//Data.shift_count)):
     vector = [float(value) for value in Model.recursive_output_values[i*Data.shift_count:i*Data.shift_count+Data.shift_count]]
     
     word = model.wv.most_similar(numpy.array(vector))[0][0]
-    
+    print(model.wv.most_similar(numpy.array(vector)))
     text += word + " "
 
 print(text + "\n")
