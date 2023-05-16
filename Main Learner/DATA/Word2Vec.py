@@ -1,7 +1,7 @@
 from gensim.models import Word2Vec
 from nltk.tokenize import sent_tokenize, word_tokenize
 
-name = "SHERLOCK"
+name = "SHAKESPEARE"
 
 filer = open(name + "RAW.txt", "r").read().replace("\n", " ")
 
@@ -18,14 +18,14 @@ for i in sent_tokenize(filer):
 try:
     model = Word2Vec.load(name + "RAW.model")
 except:  
-    model = Word2Vec(data, vector_size=8, min_count=1, window=8)
+    model = Word2Vec(data, vector_size=4, min_count=1, window=16)
     model.save(name + "RAW.model")
 finally:
     print(model.wv.key_to_index.keys())
     print(data)
     input_values = []
     
-    vector_size = 8
+    vector_size = 4
     
     input_count = 64
     output_count = 16

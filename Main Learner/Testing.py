@@ -20,15 +20,19 @@ output_values = []
 
 Data.load(Data.input_values[-Model.input_count:], [], stream=Data.stream, shift_count=Data.shift_count)
 print(Data.input_values)
-Model.recursive_test(Data, loop_count=10, feedback_count=Data.shift_count)
+Model.test(Data)
 
 text = ""
 
-for i in range(int(len(Model.recursive_output_values)//Data.shift_count)):
-    vector = [float(value) for value in Model.recursive_output_values[i*Data.shift_count:i*Data.shift_count+Data.shift_count]]
+for i in range(32):
+    vector = [float(value) for value in Model.output_values[:Data.shift_count]]
     
     word = model.wv.most_similar(numpy.array(vector))[0][0]
     print(model.wv.most_similar(numpy.array(vector)))
     text += word + " "
+    
+    Data.load(Data.input_values[Data.shift_count:]+model.wv[word].tolist(), [], stream=Data.stream, shift_count=Data.shift_count)
+    
+    Model.test(Data)
 
 print(text + "\n")
