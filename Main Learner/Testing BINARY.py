@@ -14,7 +14,7 @@ Model.load(model_name)
 Data = Data_DL.data()
 Data.extract(data_name + "TEST")
 
-model = Word2Vec.load("./DATA/" + data_name[6:] + "RAW.model")
+model = Word2Vec.load("./DATA/" + data_name + "RAW.model")
 
 output_values = []
 

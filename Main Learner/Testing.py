@@ -18,9 +18,11 @@ model = Word2Vec.load("./DATA/" + data_name[6:] + "RAW.model")
 
 output_values = []
 
-Data.load(Data.input_values[-Model.input_count:], [], stream=Data.stream, shift_count=Data.shift_count)
+Data.load(Data.input_values[-Model.input_count*2:], [], stream=Data.stream, shift_count=Data.shift_count)
 print(Data.input_values)
+
 Model.test(Data)
+print(Model.output_values)
 
 text = ""
 

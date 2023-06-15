@@ -19,7 +19,7 @@ for i in sent_tokenize(filer):
 try:
     model = Word2Vec.load(name + "RAW.model")
 except:  
-    model = Word2Vec(data, vector_size=8, min_count=1, window=8)
+    model = Word2Vec(data, vector_size=8, min_count=1, window=16)
     model.save(name + "RAW.model")
 finally:
     print(model.wv.key_to_index.keys())
